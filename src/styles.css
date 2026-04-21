@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #0A0E1F;
+  color: #F4EEE0;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-feature-settings: 'liga', 'dlig';
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #D4A24C;
+}
+
+.rule {
+  display: inline-block;
+  width: 44px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D4A24C 50%, transparent);
+  vertical-align: middle;
+  margin-right: 14px;
+  opacity: 0.9;
+}
+
+.gold-text {
+  color: #D4A24C;
+}
+
+/* Mughal-miniature palette gradient — used behind hero */
+.bg-indigo-warm {
+  background:
+    radial-gradient(1200px 800px at 80% 10%, rgba(212, 162, 76, 0.12), transparent 60%),
+    radial-gradient(1000px 900px at 10% 90%, rgba(201, 74, 58, 0.08), transparent 60%),
+    linear-gradient(180deg, #0A0E1F 0%, #0F1428 100%);
+}
+
+/* Fine jaali (trellis) lattice pattern */
+.jaali-bg {
+  background-color: transparent;
+  background-image:
+    linear-gradient(45deg, rgba(212, 162, 76, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(212, 162, 76, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(212, 162, 76, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(212, 162, 76, 0.05) 75%);
+  background-size: 34px 34px;
+  background-position: 0 0, 0 17px, 17px -17px, -17px 0;
+}
+
+.vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 14, 31, 0.9) 100%);
+}
+
+.split-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.mask-line {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.cta-input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(244, 238, 224, 0.25);
+  padding: 0.85rem 0;
+  color: #F4EEE0;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+.cta-input::placeholder {
+  color: rgba(244, 238, 224, 0.4);
+  letter-spacing: 0.05em;
+}
+.cta-input:focus {
+  border-color: #D4A24C;
+}
+
+.gold-btn {
+  position: relative;
+  background: linear-gradient(180deg, #E8C974 0%, #D4A24C 55%, #A07828 100%);
+  color: #0A0E1F;
+  padding: 1.05rem 2.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow:
+    0 10px 40px -12px rgba(212, 162, 76, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.gold-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid rgba(212, 162, 76, 0.4);
+  pointer-events: none;
+  transition: inset 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.gold-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 54px -10px rgba(212, 162, 76, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.gold-btn:hover::before {
+  inset: -6px;
+}
+
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 162, 76, 0.5),
+    transparent
+  );
+}
+
+/* Lotus-petal corner ornaments */
+.ornament-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+}
+.ornament-corner::before,
+.ornament-corner::after {
+  content: '';
+  position: absolute;
+  background: #D4A24C;
+}
+.ornament-corner::before { width: 100%; height: 1px; top: 0; left: 0; }
+.ornament-corner::after  { width: 1px; height: 100%; top: 0; left: 0; }
+.ornament-corner.tr { transform: scaleX(-1); right: 0; top: 0; }
+.ornament-corner.bl { transform: scaleY(-1); left: 0; bottom: 0; }
+.ornament-corner.br { transform: scale(-1, -1); right: 0; bottom: 0; }
+
+/* Nav link gold underline sweep */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #D4A24C;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+body.has-custom-cursor,
+body.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    1200px circle at 50% 0%,
+    rgba(212, 162, 76, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
