@@ -1,93 +1,90 @@
+
 # ScrollSpire
 
-Most luxury real-estate websites are a 14-page PDF with a scrollbar.
-ScrollSpire is an attempt at something else: a cinematic, scroll-driven
-landing page with a procedurally-built 3D tower that reveals itself floor
-by floor as you scroll.
+Most luxury real estate sites feel like scrolling through a PDF.
+ScrollSpire tries to break that pattern.
 
-Demo property is **Kohinoor Heights** — a fictional 48-storey tower on
-Worli Sea Face, Mumbai. The content is invented; the code is the point.
+It’s a cinematic, scroll-driven landing page where a 3D tower gradually reveals itself—floor by floor—as you move down the page.
 
-## Run it
+The demo property, **Kohinoor Heights**, is fictional. The focus here isn’t the listing—it’s the experience.
 
-```
+---
+
+## Getting Started
+
+```bash
 npm install
 npm run dev
 ```
 
-Then http://localhost:5173. Add `--host` to the dev command if you want to see it
-on your phone over the LAN.
+Open: [http://localhost:5173](http://localhost:5173)
+Use `--host` if you want to test it on your phone over the same network.
 
-## The scene map
+---
 
-Six chapters, one long scroll, no page loads.
+## How the experience flows
 
-| Scroll | Chapter | What happens |
-|---|---|---|
-| 0–9% | Prologue · The Arrival | Hero title fades in through the loader curtain |
-| 9–26% | I · The Rise | Camera orbits as 48 floors stack up, wireframe → solid |
-| 26–60% | II · The Tour | Dive sweep through four pinned amenities |
-| 60–74% | III · The Lifestyle | Clip-path wipe + testimonial card |
-| 74–86% | IV · The Craft | Materials gallery + credits |
-| 86–100% | V · The Address | 360° spin, gold glow, viewing form |
+One continuous scroll, split into six chapters:
 
-## What's actually going on
+* **0–9% · Prologue**
+  Intro reveal with a curtain-style loader
 
-The tower isn't a GLB — it's 42 procedural floors plus a chhatri-dome crown
-(hemisphere + amlaka ring + kalash finial), each mesh animated per-frame against a
-shared `scrollState.progress` that Lenis populates from real scroll position.
+* **9–26% · The Rise**
+  Camera orbits while floors build up dynamically
 
-`src/lib/scroll.js` is the spine. Lenis drives it, `ScrollTrigger.update()`
-piggybacks on every Lenis tick, and `scrollState` is a plain mutable object that
-both GSAP and R3F read. No context provider, no re-renders — the 3D scene reads
-scroll progress without React ever knowing a scroll happened.
+* **26–60% · The Tour**
+  Smooth flythrough of key amenities
 
-The loader-to-hero handoff is the bit I'm happiest with. `onReveal` fires when the
-curtains *start* parting, not when they finish — so the hero text animates in
-*through* the curtain, not after it.
+* **60–74% · The Lifestyle**
+  Visual transition with testimonial overlay
 
-## The bug that took an evening
+* **74–86% · The Craft**
+  Materials and design details
 
-In dev, the tower rotated at roughly 2× the intended rate; in production builds
-it was fine. Turned out React StrictMode was double-invoking the effect that
-registered Lenis's RAF callback on `gsap.ticker`, and my original cleanup only
-killed the Lenis instance, not the ticker listener. Every StrictMode remount
-was stacking another ticker subscriber. Fix in `src/lib/scroll.js`: store the
-callback in a module-level `tickerFn` and call `gsap.ticker.remove(tickerFn)`
-in `destroyScroll()`. Obvious in retrospect, two hours at the time.
+* **86–100% · The Address**
+  Final rotation + CTA
+
+---
+
+## Under the hood
+
+The building is fully procedural—no pre-made 3D model.
+
+Each floor is generated and animated based on a shared scroll value. Instead of relying on React state, scroll progress is stored in a simple mutable object that both animation (GSAP) and rendering (Three.js) can read directly. This avoids unnecessary re-renders and keeps things smooth.
+
+Lenis handles scrolling, GSAP handles timing, and both stay in sync through a lightweight bridge.
+
+One detail I liked refining:
+the hero text starts animating *as the loader opens*, not after. It makes the transition feel more connected.
+
+---
 
 ## Stack
 
-Vite + React, Three.js via `@react-three/fiber`, drei for helpers,
-`@react-three/postprocessing` for bloom, GSAP ScrollTrigger, Lenis, Tailwind.
+* Vite + React
+* Three.js (via React Three Fiber)
+* GSAP + ScrollTrigger
+* Lenis (smooth scrolling)
+* Tailwind CSS
 
-No Next.js. Fast HMR was the priority; SSR wasn't worth the friction for a
-portfolio piece. Swap to Next if you need the SEO.
+No SSR—this is built as a front-end experience first.
 
-## Swap for production
+---
 
-- `src/data/property.js` → GROQ fetch from Sanity
-- `BuildingModel.jsx` → `useGLTF('/models/building.glb')`
-- Amenity/lifestyle `<img>` → Mux or Cloudinary video
-- `CTASection` `onSubmit` is a stub with a setTimeout; wire it to `/api/contact`
-  with Resend, or drop in a Formspree endpoint for zero-backend
+## If you want to adapt it
 
-## Known rough edges
+* Replace static data with a CMS (e.g., Sanity)
+* Swap procedural model with a real `.glb` if needed
+* Upgrade images to video for richer sections
+* Connect the form to an API or service like Formspree
 
-- Camera yaw during the Tour wraps a touch tight — amenity #4 can get a weird framing
-- Mobile perf is guarded (fewer particles, smaller reflector, DPR capped) but the
-  spark emitter still costs a few frames on older Android
-- `SectionDivider` is decorative; once the chapter rail is visible on desktop it's
-  redundant
-- Amenity ScrollTriggers capture `window.innerHeight` at creation time — resizing
-  mid-section drifts the card boundaries. Fix is `ScrollTrigger.refresh()` on
-  resize but it flashes the cards. Haven't solved that yet
-- Interior-light flicker uses `Math.random()` per frame per floor. Some floors
-  strobe in a distracting way, want to swap for a cheap noise fn
-- Form posts nowhere. It's a `setTimeout` stub. See `CTASection.jsx`
-- Drawer nav doesn't focus-trap — tabbing out lands on the hidden desktop nav
+---
 
-If you're poking around the code, the files worth reading first are
-`HeroCanvas.jsx` (camera + post-fx), `BuildingModel.jsx` (the procedural tower),
-and `lib/scroll.js` (the tiny Lenis↔GSAP bridge that makes everything else
-possible).
+## Things to improve
+
+* Camera angles during the tour could be smoother
+* Performance on older mobile devices still needs tuning
+* Resize handling for scroll sections isn’t perfect yet
+* Lighting flicker is random—could be more controlled
+* Form isn’t wired to a backend
+* Mobile navigation needs better accessibility (focus handling)
