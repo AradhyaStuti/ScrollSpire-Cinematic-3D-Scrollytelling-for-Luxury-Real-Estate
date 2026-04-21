@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0E1F" />
+    <meta name="description" content="Kohinoor Heights — a vertical haveli rising above the Arabian skyline at Worli Sea Face, Mumbai. 48 floors, 12 residences. By invitation only." />
+
+    <!-- Canonical / OpenGraph -->
+    <meta property="og:title" content="Kohinoor Heights · A Private Vertical Estate" />
+    <meta property="og:description" content="A mountain of light, above the Arabian skyline. Worli Sea Face, Mumbai." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kohinoor Heights" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kohinoor Heights · A Private Vertical Estate" />
+    <meta name="twitter:description" content="A mountain of light, above the Arabian skyline. Worli Sea Face, Mumbai." />
+
+    <!-- Inline SVG favicon: gold diamond + chhatri silhouette -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%230A0E1F%22%2F%3E%3Cpath%20d%3D%22M16%206l3%206-3%202-3-2z%22%20fill%3D%22%23D4A24C%22%2F%3E%3Cpath%20d%3D%22M10%2015h12v10a6%206%200%200%201-6%206%206%206%200%200%201-6-6z%22%20fill%3D%22none%22%20stroke%3D%22%23D4A24C%22%20stroke-width%3D%221.3%22%2F%3E%3Cline%20x1%3D%2216%22%20y1%3D%223%22%20x2%3D%2216%22%20y2%3D%226%22%20stroke%3D%22%23D4A24C%22%20stroke-width%3D%221%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%223%22%20r%3D%221.2%22%20fill%3D%22%23D4A24C%22%2F%3E%3C%2Fsvg%3E"
+    />
+
+    <title>Kohinoor Heights · Worli, Mumbai</title>
+
+    <!-- Fonts with preconnect for LCP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data — RealEstateListing -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Residence",
+        "name": "Kohinoor Heights",
+        "description": "A private vertical estate in Worli Sea Face, Mumbai.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Worli Sea Face",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "addressCountry": "IN"
+        },
+        "numberOfRooms": 12
+      }
+    </script>
+  </head>
+  <body class="bg-ink text-cream">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
