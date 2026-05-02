@@ -1,5 +1,10 @@
 // Mock data shaped to the Sanity `property` schema in the original build
 // guide. In prod, swap this for client.fetch(propertyQuery).
+//
+// Everything below is invented for the portfolio demo — the developer,
+// architect, address, RERA number, phone, email, testimonial. Don't
+// pattern-match these to real firms or publications; if you fork this
+// for a real project, replace them all.
 
 export const property = {
   name: 'Kohinoor Heights',
@@ -15,14 +20,14 @@ export const property = {
   timezone: 'Asia/Kolkata',
   credits: {
     developer: 'Aurelia Urban Projects',
-    architect: 'Rahul Mehrotra Associates',
-    interiors: 'Hirsch Bedner · Mumbai',
-    landscape: 'Kishore Pradhan Studio'
+    architect: 'Studio Vermilion',
+    interiors: 'Atelier Khayal',
+    landscape: 'Banyan & Bay'
   },
   testimonial: {
     quote:
       'It is not a tower. It is an address — the way a paragraph is not a novel.',
-    author: 'Architectural Digest · India'
+    author: 'From the press kit'
   },
   ctaHeadline: 'Claim Your Address.',
   contactEmail: 'concierge@kohinoorheights.in',

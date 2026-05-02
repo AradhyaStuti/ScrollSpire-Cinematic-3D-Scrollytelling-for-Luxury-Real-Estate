@@ -3,8 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../lib/scroll.js'
 
-// Particles on independent helical orbits. Radius scales with
-// sin(progress·π) so the swarm fans out mid-scroll.
+// Helical-orbit dust. Swarm radius bulges mid-scroll via sin(p·π).
 export default function DustField({ count = 420 }) {
   const ref = useRef()
 
@@ -26,9 +25,9 @@ export default function DustField({ count = 420 }) {
 
   const positions = useMemo(() => new Float32Array(count * 3), [count])
 
-  useFrame((_, dt) => {
+  useFrame(({ clock }) => {
     if (!ref.current) return
-    const t = performance.now() * 0.001
+    const t = clock.getElapsedTime()
     const p = scrollState.progress
     const radiusScale = 1 + Math.sin(p * Math.PI) * 0.4
 

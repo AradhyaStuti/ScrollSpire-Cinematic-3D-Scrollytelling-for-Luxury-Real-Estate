@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { scrollState } from '../lib/scroll.js'
-import { getLenis } from '../lib/scroll.js'
+import { scrollState, getLenis } from '../lib/scroll.js'
 
 export default function ScrollTopButton() {
   const [visible, setVisible] = useState(false)

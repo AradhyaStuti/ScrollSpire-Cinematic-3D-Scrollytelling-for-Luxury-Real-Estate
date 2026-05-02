@@ -20,9 +20,10 @@ export default function ChapterIndicator() {
   useEffect(() => {
     const tick = () => {
       const p = scrollState.progress
+      // Walk backwards: first chapter whose `from` we've passed wins.
       let idx = 0
-      for (let i = 0; i < chapters.length; i++) {
-        if (p >= chapters[i].from) idx = i
+      for (let i = chapters.length - 1; i >= 0; i--) {
+        if (p >= chapters[i].from) { idx = i; break }
       }
       setActive((curr) => (curr === idx ? curr : idx))
       if (progressRef.current) {

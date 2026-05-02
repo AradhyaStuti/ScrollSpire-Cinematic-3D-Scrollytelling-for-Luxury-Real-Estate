@@ -3,8 +3,8 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../lib/scroll.js'
 
-// phi bias keeps stars in the upper hemisphere — otherwise the mirror
-// ground doubles them and it looks wrong.
+// phi is biased so most stars sit above the horizon — without this the
+// reflector ground mirrors them and the sky reads as "fog with dots".
 export default function StarField({ count = 900 }) {
   const ref = useRef()
 

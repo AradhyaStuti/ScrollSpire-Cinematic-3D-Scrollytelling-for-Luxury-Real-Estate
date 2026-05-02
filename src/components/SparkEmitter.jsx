@@ -3,8 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../lib/scroll.js'
 
-// Looping particles around a fixed origin. visibility is scroll-driven
-// so the emitter is mostly dormant until the user reaches the CTA.
+// Looping sparks above the kalash. Mostly invisible until the CTA scene.
 export default function SparkEmitter({ origin = [0, 17, 0], count = 80 }) {
   const ref = useRef()
 

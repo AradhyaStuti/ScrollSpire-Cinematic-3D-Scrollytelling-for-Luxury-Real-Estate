@@ -3,8 +3,8 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../lib/scroll.js'
 
-// Inverted sphere with a two-stop gradient shader. Colors lerp between
-// four palette stops keyed to scroll progress.
+// Inverted sphere, three-band gradient (horizon → mid → top). The bands
+// crossfade between four named palettes as you scroll.
 export default function SkyDome() {
   const matRef = useRef()
 
