@@ -78,13 +78,3 @@ No SSR—this is built as a front-end experience first.
 * Upgrade images to video for richer sections
 * Connect the form to an API or service like Formspree
 
----
-
-## Things to improve
-
-* Camera angles during the tour could be smoother
-* Performance on older mobile devices still needs tuning
-* Resize handling for scroll sections isn’t perfect yet
-* Lighting flicker is random—could be more controlled
-* Form isn’t wired to a backend
-* Mobile navigation needs better accessibility (focus handling)
